@@ -29,8 +29,7 @@
     _delegate = nil;    
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self initialize];
@@ -60,7 +59,6 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-	NSLog(@"layoutSubviews");
     if (self.notSelectedImage == nil) return;
     
     float desiredImageWidth = (self.frame.size.width - (self.leftMargin*2) - (self.midMargin*self.imageViews.count)) / self.imageViews.count;
@@ -68,13 +66,10 @@
     float imageHeight = MAX(self.minImageSize.height, self.frame.size.height);
     
     for (int i = 0; i < self.imageViews.count; ++i) {
-        
         UIImageView *imageView = [self.imageViews objectAtIndex:i];
         CGRect imageFrame = CGRectMake(self.leftMargin + i*(self.midMargin+imageWidth), 0, imageWidth, imageHeight);
         imageView.frame = imageFrame;
-        
     }    
-    
 }
 
 - (void)setMaxRating:(int)maxRating {
@@ -148,7 +143,9 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.delegate rateView:self ratingDidChange:self.rating];
+	if ([_delegate respondsToSelector:@selector(ratingView:ratingDidChange:)]) {
+		[self.delegate ratingView:self ratingDidChange:self.rating];
+	}
 }
 
 @end

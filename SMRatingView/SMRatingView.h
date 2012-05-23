@@ -3,8 +3,8 @@
 
 @class SMRatingView;
 
-@protocol SMRatingViewDelegate
-- (void)rateView:(SMRatingView *)rateView ratingDidChange:(float)rating;
+@protocol SMRatingViewDelegate <NSObject>
+- (void)ratingView:(SMRatingView *)ratingView ratingDidChange:(float)rating;
 @end
 
 @interface SMRatingView : UIView
