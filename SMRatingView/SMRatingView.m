@@ -15,6 +15,11 @@
 @synthesize minImageSize = _minImageSize;
 @synthesize delegate = _delegate;
 
+- (void)dealloc {
+	[_imageViews release];
+	[super dealloc];
+}
+
 - (void)initialize {
     _notSelectedImage = [UIImage imageNamed:@"star_empty.png"];
     _halfSelectedImage = [UIImage imageNamed:@"star_half.png"];
